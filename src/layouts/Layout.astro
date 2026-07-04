@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const onHome = Astro.url.pathname.replace(/\/$/, '') === base.replace(/\/$/, '');
+const nav = (hash: string) => (onHome ? `#${hash}` : `${base}#${hash}`);
+const logoHref = onHome ? '#top' : base;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <title>{title}</title>
+  </head>
+  <body id="top" class="bg-ink text-bone antialiased">
+    <!-- scroll progress -->
+    <div class="fixed inset-x-0 top-0 z-50 h-[2px] bg-bone/10" aria-hidden="true">
+      <div id="playhead-bar" class="h-full w-0 bg-accent"></div>
+    </div>
+
+    <!-- minimal nav (inverts over any background) -->
+    <header class="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-6 py-5 mix-blend-difference md:px-12">
+      <a href={logoHref} class="font-mono text-sm font-medium tracking-[0.25em] text-white">CXL</a>
+      <nav class="hidden gap-8 font-mono text-xs uppercase tracking-[0.18em] text-white md:flex">
+        <a href={nav('work')} class="transition-opacity hover:opacity-60">Travail</a>
+        <a href={nav('about')} class="transition-opacity hover:opacity-60">À propos</a>
+        <a href={nav('contact')} class="transition-opacity hover:opacity-60">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- fixed film grain over everything -->
+    <div class="grain pointer-events-none fixed inset-0 z-[60] opacity-[0.045] mix-blend-overlay" aria-hidden="true"></div>
+
+    <script>
+      import '../scripts/lenis.ts';
+      import '../scripts/hero-webgl.ts';
+      import '../scripts/playhead.ts';
+      import '../scripts/reveals.ts';
+    </script>
+  </body>
+</html>

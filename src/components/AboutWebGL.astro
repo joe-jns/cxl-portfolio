@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<section id="about" class="relative w-full overflow-hidden border-t border-bone/10 bg-ink px-6 py-24 md:px-12 md:py-32">
+  <div class="mx-auto grid max-w-[1300px] gap-12 md:grid-cols-[0.85fr_1.15fr] md:gap-20">
+    <div class="relative">
+      <!-- TODO: remplacer portrait.jpg par un vrai portrait de Calixte -->
+      <canvas
+        data-src={`${base}portrait.jpg`}
+        class="gl-distort aspect-[4/5] w-full rounded-[10px]"
+        aria-hidden="true"
+      ></canvas>
+      <span class="mt-4 block font-mono text-[11px] uppercase tracking-[0.25em] text-bone/40">Calixte Janssens, {site.location}</span>
+    </div>
+
+    <div class="flex flex-col justify-center">
+      <h2 class="font-display text-5xl font-medium tracking-tighter text-bone md:text-7xl">À propos</h2>
+      <div class="mt-8 space-y-6">
+        {site.aboutParagraphs.map((p) => (
+          <p data-reveal class="max-w-[58ch] text-lg leading-relaxed text-bone/70 md:text-xl">{p}</p>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

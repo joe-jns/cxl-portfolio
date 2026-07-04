@@ -1,0 +1,35 @@
+---
+import { site } from '../data/site';
+const heroSrc = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}placeholder-hero.jpg`;
+---
+<section class="relative h-[100dvh] w-full overflow-hidden bg-ink">
+  <!-- TODO: remplacer placeholder-hero.jpg par une vraie image/reel de Calixte -->
+  <canvas
+    data-src={heroSrc}
+    class="gl-distort absolute inset-0 h-full w-full"
+    aria-hidden="true"
+  ></canvas>
+
+  <!-- legibility scrim -->
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/10"></div>
+
+  <div class="relative z-10 flex h-full flex-col justify-end p-6 md:p-12">
+    <div>
+      <h1 class="font-display text-[18vw] font-medium leading-[0.82] tracking-tighter text-bone md:text-[15vw]">
+        Calixte<br /><span class="text-bone/55">Janssens</span>
+      </h1>
+      <div class="mt-6 flex flex-wrap items-end justify-between gap-4">
+        <p class="max-w-[36ch] text-base text-bone/75 md:text-lg">
+          {site.role}. Le montage comme rythme, la couleur comme émotion.
+        </p>
+        <a
+          href="#work"
+          class="group inline-flex items-center gap-3 font-mono text-sm text-bone transition-colors hover:text-accent"
+        >
+          <span class="h-2 w-2 rounded-full bg-accent"></span>
+          Voir le travail
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

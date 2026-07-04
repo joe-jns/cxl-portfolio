@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroWebGL from '../components/HeroWebGL.astro';
+import WorkWebGL from '../components/WorkWebGL.astro';
+import AboutWebGL from '../components/AboutWebGL.astro';
+import SkillsMarquee from '../components/SkillsMarquee.astro';
+import ContactX from '../components/ContactX.astro';
+---
+<Layout
+  title="CXL - Calixte Janssens, monteuse vidéo"
+  description="Calixte Janssens (CXL), monteuse vidéo et cadreuse à Charleroi. Clips, courts-métrages, contenu de marque."
+>
+  <HeroWebGL />
+  <WorkWebGL />
+  <AboutWebGL />
+  <SkillsMarquee />
+  <ContactX />
+
+  <script>
+    import '../scripts/work-webgl.ts';
+  </script>
+</Layout>

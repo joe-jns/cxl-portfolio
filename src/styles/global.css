@@ -1,0 +1,70 @@
+@import "tailwindcss";
+/* Force scanning of all source files, incl. bracket-named dynamic routes
+   like pages/projets/[slug].astro that auto-detection skips. */
+@source "../**/*.{astro,html,ts,tsx,js,jsx}";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+@theme {
+  --color-ink: #0a0a0b;
+  --color-ink-2: #111113;
+  --color-bone: #ECEAE4;
+  --color-bone-dim: #9b988f;
+  --color-accent: #F5C33B;
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --radius: 10px;
+}
+
+html { scroll-behavior: auto; }
+
+/* Horizontal track: when the JS pin is NOT active (reduced motion), fall back
+   to a vertical stack so nothing overflows or gets clipped. */
+@media (prefers-reduced-motion: reduce) {
+  #h-track { flex-direction: column !important; }
+  #h-track [data-panel] {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100dvh;
+  }
+}
+
+body {
+  font-family: var(--font-display);
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--color-accent); color: var(--color-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Kinetic tool marquee */
+.marquee-track { animation: marquee 30s linear infinite; will-change: transform; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Fixed film-grain overlay */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

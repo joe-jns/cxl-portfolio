@@ -1,0 +1,32 @@
+---
+import { projects } from '../data/projects';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+<section id="work-webgl" class="relative min-h-[100dvh] w-full overflow-hidden bg-ink">
+  <!-- WebGL preview panel (revealed on hover) -->
+  <canvas class="pointer-events-none absolute right-0 top-0 h-full w-full opacity-90 md:w-[46%]" aria-hidden="true"></canvas>
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent md:via-ink/30"></div>
+
+  <div class="relative z-10 flex min-h-[100dvh] flex-col justify-center px-6 py-24 md:px-12">
+    <p class="font-mono text-xs uppercase tracking-[0.25em] text-bone/50">00:12 / Travail</p>
+    <ul class="mt-8 flex flex-col">
+      {projects.map((p, i) => (
+        <li class="border-t border-bone/10 last:border-b">
+          <a
+            href={`${base}projets/${p.slug}`}
+            data-work-item
+            data-src={`${base}${p.image}`}
+            data-index={i}
+            class="group flex items-baseline gap-5 py-4 md:py-5"
+          >
+            <span class="font-mono text-xs text-bone/40 tabular-nums">0{i + 1}</span>
+            <span class="font-display text-3xl font-medium tracking-tight text-bone/55 transition-colors duration-300 group-hover:text-bone md:text-6xl">
+              {p.title}
+            </span>
+            <span class="ml-auto hidden font-mono text-[11px] text-bone/40 md:block">{p.format}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

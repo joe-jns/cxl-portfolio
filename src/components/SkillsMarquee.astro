@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+const all = [...site.tools.postprod, ...site.tools.plateau];
+---
+<section id="skills" class="relative w-full overflow-hidden border-t border-bone/10 bg-ink py-24 md:py-32">
+  <div class="px-6 md:px-12">
+    <h2 class="font-display text-5xl font-medium tracking-tighter text-bone md:text-7xl">Savoir-faire</h2>
+    <div class="mt-6 flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs uppercase tracking-[0.2em] text-bone/45">
+      <span>Post-production</span>
+      <span>Cadrage</span>
+      <span>Lumière</span>
+      <span>Prise de son</span>
+    </div>
+  </div>
+
+  <!-- kinetic tool marquee (single, seamless loop) -->
+  <div class="mt-12 flex overflow-hidden border-y border-bone/10 py-6">
+    <div class="marquee-track flex shrink-0 items-center whitespace-nowrap">
+      {all.concat(all).map((t) => (
+        <span class="flex items-center font-display text-3xl font-medium tracking-tight text-bone/70 md:text-5xl">
+          <span class="px-8 text-accent">/</span>{t}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
